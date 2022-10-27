@@ -1,0 +1,38 @@
+table "public"."category" {
+  columns = (
+    column "category_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.category_category_id_seq'::regclass)
+    }
+    column "name" {
+      type = text
+      null = NOT NULL
+    }
+    column "last_update" {
+      type = timestamp with time zone
+      null = NOT NULL
+      default = now()
+    }
+  )
+  primaryKeys = (
+    primaryKey "category_pkey" {
+      columns = [
+        "category_id"
+      ]
+    }
+  )
+}
+
+trigger "public"."category"."last_updated" {
+  timing = BEFORE
+  events = [
+    UPDATE
+  ]
+  level = ROW
+  function = public.last_updated
+  functionArguments = [
+  ]
+  constraint = False
+}
+

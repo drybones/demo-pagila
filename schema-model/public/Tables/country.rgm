@@ -1,0 +1,38 @@
+table "public"."country" {
+  columns = (
+    column "country_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.country_country_id_seq'::regclass)
+    }
+    column "country" {
+      type = text
+      null = NOT NULL
+    }
+    column "last_update" {
+      type = timestamp with time zone
+      null = NOT NULL
+      default = now()
+    }
+  )
+  primaryKeys = (
+    primaryKey "country_pkey" {
+      columns = [
+        "country_id"
+      ]
+    }
+  )
+}
+
+trigger "public"."country"."last_updated" {
+  timing = BEFORE
+  events = [
+    UPDATE
+  ]
+  level = ROW
+  function = public.last_updated
+  functionArguments = [
+  ]
+  constraint = False
+}
+

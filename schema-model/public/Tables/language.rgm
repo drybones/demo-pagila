@@ -1,0 +1,38 @@
+table "public"."language" {
+  columns = (
+    column "language_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.language_language_id_seq'::regclass)
+    }
+    column "name" {
+      type = character(20)
+      null = NOT NULL
+    }
+    column "last_update" {
+      type = timestamp with time zone
+      null = NOT NULL
+      default = now()
+    }
+  )
+  primaryKeys = (
+    primaryKey "language_pkey" {
+      columns = [
+        "language_id"
+      ]
+    }
+  )
+}
+
+trigger "public"."language"."last_updated" {
+  timing = BEFORE
+  events = [
+    UPDATE
+  ]
+  level = ROW
+  function = public.last_updated
+  functionArguments = [
+  ]
+  constraint = False
+}
+

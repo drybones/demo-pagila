@@ -1,0 +1,4 @@
+domain "public"."b??g??nt" {
+  type = bigint
+}
+

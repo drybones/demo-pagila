@@ -1,0 +1,30 @@
+table "public"."payment" {
+  columns = (
+    column "payment_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.payment_payment_id_seq'::regclass)
+    }
+    column "customer_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "staff_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "rental_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "amount" {
+      type = numeric(5,2)
+      null = NOT NULL
+    }
+    column "payment_date" {
+      type = timestamp with time zone
+      null = NOT NULL
+    }
+  )
+}
+

@@ -1,0 +1,51 @@
+table "public"."actor" {
+  columns = (
+    column "actor_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.actor_actor_id_seq'::regclass)
+    }
+    column "first_name" {
+      type = text
+      null = NOT NULL
+    }
+    column "last_name" {
+      type = text
+      null = NOT NULL
+    }
+    column "last_update" {
+      type = timestamp with time zone
+      null = NOT NULL
+      default = now()
+    }
+  )
+  primaryKeys = (
+    primaryKey "actor_pkey" {
+      columns = [
+        "actor_id"
+      ]
+    }
+  )
+}
+
+index "public"."idx_actor_last_name" {
+  table = "public"."actor"
+  type = btree
+  columns = [
+    "last_name"
+  ]
+  isUnique = False
+}
+
+trigger "public"."actor"."last_updated" {
+  timing = BEFORE
+  events = [
+    UPDATE
+  ]
+  level = ROW
+  function = public.last_updated
+  functionArguments = [
+  ]
+  constraint = False
+}
+

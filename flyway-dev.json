@@ -1,0 +1,17 @@
+{
+  "version": "2.0",
+  "name": "demo-pagila",
+  "id": "4b443fc3-7066-44df-b996-19150567e846",
+  "databaseType": "PostgreSql",
+  "schemas": [
+    "public"
+  ],
+  "development": {
+    "scriptsFolder": "./schema-model"
+  },
+  "deployment": {
+    "flywayConfFiles": [
+      "./flyway.conf"
+    ]
+  }
+}

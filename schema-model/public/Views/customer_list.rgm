@@ -1,0 +1,50 @@
+view "public"."customer_list" {
+  text = """-
+SELECT cu.customer_id AS id,
+    ((cu.first_name || ' '::text) || cu.last_name) AS name,
+    a.address,
+    a.postal_code AS "zip code",
+    a.phone,
+    city.city,
+    country.country,
+        CASE
+            WHEN cu.activebool THEN 'active'::text
+            ELSE ''::text
+        END AS notes,
+    cu.store_id AS sid
+   FROM (((public.customer cu
+     JOIN public.address a ON ((cu.address_id = a.address_id)))
+     JOIN public.city ON ((a.city_id = city.city_id)))
+     JOIN public.country ON ((city.country_id = country.country_id)));
+"""
+  columns = (
+    column "id" {
+      type = "integer"
+    }
+    column "name" {
+      type = text
+    }
+    column "address" {
+      type = text
+    }
+    column "zip code" {
+      type = text
+    }
+    column "phone" {
+      type = text
+    }
+    column "city" {
+      type = text
+    }
+    column "country" {
+      type = text
+    }
+    column "notes" {
+      type = text
+    }
+    column "sid" {
+      type = "integer"
+    }
+  )
+}
+

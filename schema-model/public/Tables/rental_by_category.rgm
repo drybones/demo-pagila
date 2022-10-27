@@ -1,0 +1,9 @@
+index "public"."rental_category" {
+  table = "public"."rental_by_category"
+  type = btree
+  columns = [
+    "category"
+  ]
+  isUnique = True
+}
+

@@ -1,0 +1,90 @@
+table "public"."staff" {
+  columns = (
+    column "staff_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.staff_staff_id_seq'::regclass)
+    }
+    column "first_name" {
+      type = text
+      null = NOT NULL
+    }
+    column "last_name" {
+      type = text
+      null = NOT NULL
+    }
+    column "address_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "email" {
+      type = text
+    }
+    column "store_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "active" {
+      type = boolean
+      null = NOT NULL
+      default = true
+    }
+    column "username" {
+      type = text
+      null = NOT NULL
+    }
+    column "password" {
+      type = text
+    }
+    column "last_update" {
+      type = timestamp with time zone
+      null = NOT NULL
+      default = now()
+    }
+    column "picture" {
+      type = bytea
+    }
+  )
+  primaryKeys = (
+    primaryKey "staff_pkey" {
+      columns = [
+        "staff_id"
+      ]
+    }
+  )
+}
+
+foreignKey "public"."staff"."staff_address_id_fkey" {
+  columns = [
+    "address_id"
+  ]
+  referencedTable = "public"."address"
+  referencedColumns = [
+    "address_id"
+  ]
+  onUpdate = CASCADE
+  onDelete = RESTRICT
+}
+
+foreignKey "public"."staff"."staff_store_id_fkey" {
+  columns = [
+    "store_id"
+  ]
+  referencedTable = "public"."store"
+  referencedColumns = [
+    "store_id"
+  ]
+}
+
+trigger "public"."staff"."last_updated" {
+  timing = BEFORE
+  events = [
+    UPDATE
+  ]
+  level = ROW
+  function = public.last_updated
+  functionArguments = [
+  ]
+  constraint = False
+}
+
