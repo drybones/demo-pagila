@@ -41,6 +41,9 @@ table "public"."customer" {
     column "active" {
       type = integer
     }
+    column "twitter_handle" {
+      type = text
+    }
   )
   primaryKeys = (
     primaryKey "customer_pkey" {
