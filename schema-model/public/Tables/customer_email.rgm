@@ -1,0 +1,41 @@
+table "public"."customer_email" {
+  columns = (
+    column "customer_id" {
+      type = integer
+      null = NOT NULL
+    }
+    column "email_id" {
+      type = integer
+      null = NOT NULL
+    }
+  )
+  primaryKeys = (
+    primaryKey "customer_email_pkey" {
+      columns = [
+        "customer_id"
+        "email_id"
+      ]
+    }
+  )
+}
+
+foreignKey "public"."customer_email"."customer_email_customer_id" {
+  columns = [
+    "customer_id"
+  ]
+  referencedTable = "public"."customer"
+  referencedColumns = [
+    "customer_id"
+  ]
+}
+
+foreignKey "public"."customer_email"."customer_email_email_id" {
+  columns = [
+    "email_id"
+  ]
+  referencedTable = "public"."email"
+  referencedColumns = [
+    "email_id"
+  ]
+}
+

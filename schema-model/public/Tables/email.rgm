@@ -1,0 +1,21 @@
+table "public"."email" {
+  columns = (
+    column "email_id" {
+      type = integer
+      null = NOT NULL
+      default = nextval('public.email_email_id_seq'::regclass)
+    }
+    column "email_address" {
+      type = text
+      null = NOT NULL
+    }
+  )
+  primaryKeys = (
+    primaryKey "email_pkey" {
+      columns = [
+        "email_id"
+      ]
+    }
+  )
+}
+
